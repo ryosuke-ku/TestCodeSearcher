@@ -30,7 +30,7 @@ public class TestCodeMap {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 
-		String dir_path = "/home/user/Desktop/FACoY/data_set/Git_20161108/vishnun_SHOPAHOLIC" + 
+		String dir_path = "/home/user/Desktop/FACoY/data_set/Git_20161108" + 
 				"";  //検索開始したいフォルダのPath
 		String extension = "Test.java";   //検索したいTestファイルの拡張子(今回は"<クラス名+Test>"をテストコードとする)
 
