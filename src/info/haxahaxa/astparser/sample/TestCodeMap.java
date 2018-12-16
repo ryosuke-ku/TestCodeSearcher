@@ -30,7 +30,7 @@ public class TestCodeMap {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 
-		String dir_path = "/home/user/Desktop/FACoY/data_set/Git_20161108" + 
+		String dir_path = "/home/user/Desktop/FACoY/data_set/Git_20161108/" + 
 				"";  //検索開始したいフォルダのPath
 		String extension = "Test.java";   //検索したいTestファイルの拡張子(今回は"<クラス名+Test>"をテストコードとする)
 
@@ -46,13 +46,13 @@ public class TestCodeMap {
 
 			String data3 = data2[i].replace("Test", "");
 			
-			System.out.println("テストファイルのPath["+i+ "]--> "+ data[i]);
-			System.out.println(data[i]+ "--> "+ data3);
+//			System.out.println("テストファイルのPath["+i+ "]--> "+ data[i]);
+//			System.out.println(data[i]+ "--> "+ data3);
 			
 			map.put(data3, data[i]);
-			System.out.println("----mapping---");
-			System.out.println(map.get(data3));
-			System.out.println("\n");
+//			System.out.println("----mapping---");
+			System.out.println("["+i+"] "+data3 + " <--" + map.get(data3));
+//			System.out.println("\n");
 /*
 			FileReader f = null;
 			f = new FileReader(data[i]);
