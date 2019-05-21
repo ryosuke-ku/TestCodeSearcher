@@ -1,21 +1,8 @@
 
 package info.haxahaxa.astparser.sample;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
-
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.core.dom.ASTVisitor;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-
-import info.haxahaxa.astparser.sample.visitor.SampleVisitor1;
-import info.haxahaxa.astparser.util.Envs;
-import info.haxahaxa.astparser.util.SourceFile;
 
 
 /**
@@ -25,92 +12,101 @@ import info.haxahaxa.astparser.util.SourceFile;
  *
  */
 public class TestCodeMap {
-	private static ASTVisitor visitor = new SampleVisitor1();
-
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 
-		String dir_path = "/home/user/Desktop/FACoY/data_set/Git_20161108/" + 
-				"";  //検索開始したいフォルダのPath
+		String dir_path = "D:/ryosuke-ku/data_set/Git_20161108/xwiki_xwiki-enterprise";  //検索開始したいフォルダのPath
 		String extension = "Test.java";   //検索したいTestファイルの拡張子(今回は"<クラス名+Test>"をテストコードとする)
 
 		String data[];
 		data = file_search(dir_path, extension);
 
+		for(int i =0 ;i<data.length; i++) {
+			System.out.println(data[i]);
+		}
+
+
 		String data2[];
 		data2 = production_code_search(dir_path, extension);
-		
-		 HashMap<String,String> map = new HashMap<String,String>();
-		
+
+
+		String data7;
+		data7 = file_search3(dir_path, extension);
+		System.out.println(data7);
+
+		HashMap<String,String> map = new HashMap<String,String>();
+
+		String[] str1 = new String[10000000];
+		String[] str2 = new String[10000000];
+		String[] str3 = new String[10000000];
+		String[] str4 = new String[10000000];
+		String[] str5 = new String[10000000];
+
+		String[] data5 = new String[10000000];
+
 		for(int i=0;i<data.length;i++) {
 
-			String data3 = data2[i].replace("Test", "");
-			
-//			System.out.println("テストファイルのPath["+i+ "]--> "+ data[i]);
-//			System.out.println(data[i]+ "--> "+ data3);
-			
-			map.put(data3, data[i]);
-//			System.out.println("----mapping---");
-			System.out.println("["+i+"] "+data3 + " <--" + map.get(data3));
-//			System.out.println("\n");
-/*
-			FileReader f = null;
-			f = new FileReader(data[i]);
-	     	s.loadJavaFile(f);
-*/
-			SourceFile sourceFile = new SourceFile(data[i]);
-			CompilationUnit unit;
-/*			ASTParser astParser = ASTParser.newParser(AST.JLS4);
-			// 以下の setBindingsRecovery setStatementsRecovery はおまじない．
-			// 完成しているソースコードを解析する時は呼ぶ必要ない．
-			// 詳しく知りたいならば，IMBのASTParser関連のドキュメントとかを参照すべき．
-			astParser.setBindingsRecovery(true);
-			astParser.setStatementsRecovery(true);
-			// 次の setResolveBindings と setEnvironment が重要！！
-			// setResolveBindings(true) をしておかないとまともに解析はできない．
-			// setResolveBindings をまともに機能させるために setEnvironment が必要．
-			astParser.setResolveBindings(true);
-			// setEnvironment の第一引数にはクラスパスの配列．第二引数にはソースコードを検索するパスの配列
-			// 第三第四については何も考えず null, true ．納得いかない時はIBMのASTPa...
-			astParser.setEnvironment(Envs.getClassPath(), Envs.getSourcePath(),
-					null, true);
+			str1[i] = data[i].substring(0, 36);
+			System.out.println(str1[i]);
 
-			// 解析対象のソースコードの入力とか
-			astParser.setUnitName(sourceFile.getFilePath());// なんでもいいから名前を設定しておく
-			astParser.setSource(sourceFile.getSourceCode().toCharArray());// 解析対象コードを設定する
-			unit = (CompilationUnit) astParser.createAST(new NullProgressMonitor());
-			unit.recordModifications();// ASTへの操作履歴のようなものを有効に
-			// 解析実行
-			unit.accept(visitor);
+			str2[i] = data[i].substring(37-1);
+			str3[i] = str2[i].substring(0, str2[i].indexOf("/"));
 
-			System.out.println("\n");
-*/
+			str4[i] = data2[i].replace("Test", "");
+			System.out.println(str4[i]);
+
+			str5[i] = str1[i] + str3[i];
+			System.out.println(str5[i]);
+
+//			String data5[];
+//			data5 = file_search3(str5,str4);
+//			System.out.println(data5);
+//			map.put(data5[i], data[i]);
+//
+//			FileWriter fw = new FileWriter("Mapping_data.txt",true);
+//			PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
+//			SourceFile sourceFile = new SourceFile(data[i]);
+//			pw.println(data5[i] + "," + map.get(data5[i]));
+//			System.out.println(data5[i] + "," + map.get(data5[i]));
+			String t = "D:/ryosuke-ku/data_set/Git_20161108/vishnun_SHOPAHOLIC";
+			String s = "Calculator.java";
+
+			data5 = file_search(t,s);
+			System.out.println(data5[i]);
+			System.out.println("-------------");
 		}
+
+
+
+
+
+
+//		String data4[];
+//		data4 = production_code_search2(dir_path, extension);
+
+//		 HashMap<String,String> map = new HashMap<String,String>();
+
+//		for(int i=0;i<data.length;i++) {
+//
+//			String data3 = data2[i].replace("Test", "");
+//			map.put(data3, data[i]);
+
+//			String[] data5 = file_search2(data4[i], data3);
+//			System.out.println(data5);
+
+//			FileWriter fw = new FileWriter("Mapping_data.txt",true);
+//			PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
+//			SourceFile sourceFile = new SourceFile(data[i]);
+//			pw.println(data3 + "," + map.get(data3));
+//			System.out.println(data3 + "," + map.get(data3));
+
+
+
+//		}
+
+
 	}
 
-/*
-	public void loadJavaFile(FileReader file){
 
-
-		try(BufferedReader in = new BufferedReader(file)){
-			String code_s;
-
-			System.out.println("--------↓↓入力ファイルのソースコード↓↓--------------------------------------------------------------"+"\n");
-			//最後の一行まで読み込む
-			while((code_s = in.readLine()) != null){
-				System.out.println(code_s);
-			}
-
-			System.out.println("--------↑↑入力ファイルのソースコード↑↑-------------------------------------------------------------"+"\n");
-
-
-			System.out.println("--------↓↓ここから解析結果↓↓-------------------------------------------------------------");
-			in.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-*/
 	static String[] FilePath = new String[10000000];
 	static int k=0;
 
@@ -129,7 +125,43 @@ public class TestCodeMap {
 		}
 		return FilePath;
 	}
-	
+
+	public static String[] file_search2(String path, String extension){
+		File dir = new File(path);
+		File files[] = dir.listFiles();
+		for(int i=0; i<files.length; i++){
+
+			String file_name = files[i].getName();
+			if(file_name.endsWith(extension)){  //file_nameの最後尾(拡張子)が指定のものならば出力
+				FilePath[k] = path+"/"+file_name;
+				k++;
+			}else if(files[i].isDirectory()){  //ディレクトリなら再帰を行う
+				file_search2(path+"/"+file_name, extension);
+			}
+		}
+		return FilePath;
+	}
+
+
+	static String fp;
+
+	public static String file_search3(String path, String extension){
+		File dir = new File(path);
+		File files[] = dir.listFiles();
+		for(int i=0; i<files.length; i++){
+
+			String file_name = files[i].getName();
+			if(file_name.endsWith(extension)){  //file_nameの最後尾(拡張子)が指定のものならば出力
+				fp = path+"/"+file_name;
+
+			}else if(files[i].isDirectory()){  //ディレクトリなら再帰を行う
+				file_search3(path+"/"+file_name, extension);
+			}
+		}
+		return fp;
+	}
+
+
 	static String[] CodePath = new String[10000000];
 	static int t=0;
 
@@ -144,6 +176,22 @@ public class TestCodeMap {
 				t++;
 			}else if(files[i].isDirectory()){  //ディレクトリなら再帰を行う
 				production_code_search(path+"/"+file_name, extension);
+			}
+		}
+		return CodePath;
+	}
+
+	public static String[] production_code_search2(String path, String extension){
+		File dir = new File(path);
+		File files[] = dir.listFiles();
+		for(int i=0; i<files.length; i++){
+
+			String file_name = files[i].getName();
+			if(file_name.endsWith(extension)){  //file_nameの最後尾(拡張子)が指定のものならば出力
+				CodePath[t] = path+"/"+file_name;
+				t++;
+			}else if(files[i].isDirectory()){  //ディレクトリなら再帰を行う
+				production_code_search2(path+"/"+file_name, extension);
 			}
 		}
 		return CodePath;
