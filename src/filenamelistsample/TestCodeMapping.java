@@ -8,9 +8,9 @@ import java.util.List;
 public class TestCodeMapping{
 
 	public static void main(String[] args) throws IOException{
-		String dir_path = "C:\\Users\\ryosuke-ku\\Desktop\\sample_project";  //検索開始したいフォルダのPath
+		String dir_path = "D:\\ryosuke-ku\\data_set\\Git_20161108";  //検索開始したいフォルダのPath
 		String extension = "Test.java";   //検索したいTestファイルの拡張子(今回は"<クラス名+Test>"をテストコードとする)
-		String slash ="/";
+
 
 		List<String> data;
 		data = file_search(dir_path, extension);
@@ -29,37 +29,42 @@ public class TestCodeMapping{
 
 		for(int i =0 ;i<data.size(); i++){
 
-			str0.add(data.get(i).substring(0, 36)); //D:/ryosuke-ku/data_set/Git_20161108
-			str1.add(data.get(i).substring(37-1));  //xwiki_xwiki-enterprise/xwiki-enterprise/xwiki-enterprise-test/xwiki-enterprise-test-ui/src/test/it/org/xwiki/test/ui/PreviewTest.java
+			str0.add(data.get(i).substring(0, 36)); // D:/ryosuke-ku/data_set/Git_20161108
+			str1.add(data.get(i).substring(37-1));  // xwiki_xwiki-enterprise/xwiki-enterprise/xwiki-enterprise-test/xwiki-enterprise-test-ui/src/test/it/org/xwiki/test/ui/PreviewTest.java
 			str2.add(str1.get(i).substring(0, str1.get(i).indexOf("/"))); //xwiki_xwiki-enterprise
 
 			str.add(str0.get(i) + str2.get(i)); //D:/ryosuke-ku/data_set/Git_20161108/xwiki_xwiki-enterprise
 			str3.add(data2.get(i).replace("Test", "")); //Preview.java
-//			System.out.println(str.get(i));
-			System.out.println(str3.get(i));
 
-			data3.add(file_search3(str.get(i),str3.get(i)));
-//			System.out.println(data3.get(i));
-			System.out.println(data3.get(i).length());
+			if(file_search3(str.get(i),str3.get(i))==null) {
 
-			data4.add(data3.get(i).substring(data3.get(i).lastIndexOf("/"),data3.get(i).length()));
-			System.out.println(data4.get(i));
-//			System.out.println(data4.get(i).length());
-
-			data5.add(data.get(i).substring(data.get(i).lastIndexOf("/"),data.get(i).length()).replace("Test", ""));
-			System.out.println(data5.get(i));
-//			System.out.println(data5.get(i).length());
-
-			if(data4.get(i).equals(data5.get(i))){
-				System.out.println(data3.get(i) + "," + data.get(i));
-			}else{
-				System.out.println("等しくない");
+			}else {
+				data3.add(file_search3(str.get(i),str3.get(i)));
+				data5.add(data.get(i).substring(data.get(i).lastIndexOf("/"),data.get(i).length()).replace("Test", "")); // /aTest.java => /a.java
 			}
+
+
+		}
+//			System.out.println(data3.get(i) + "," + data.get(i));
+
+		for(int k =0 ;k<data3.size(); k++){
+				data4.add(data3.get(k).substring(data3.get(k).lastIndexOf("/"),data3.get(k).length()));
+
+
+			if(data4.get(k).equals(data5.get(k))){
+				System.out.println(data3.get(k) + "," + data.get(k));
+
+			}
+		}
+
+
+
+
 //			System.out.println(data3.get(i) + "," + data.get(i));
 
 		}
 
-	}
+
 
 	static List<String> testpath = new ArrayList<>();
 	public static List<String> file_search(String path, String extension){
