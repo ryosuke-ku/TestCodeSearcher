@@ -44,16 +44,16 @@ public class TestCodeMapping{
 
 			data4.add(data3.get(i).substring(data3.get(i).lastIndexOf("/"),data3.get(i).length()));
 			System.out.println(data4.get(i));
-			System.out.println(data4.get(i).length());
+//			System.out.println(data4.get(i).length());
 
 			data5.add(data.get(i).substring(data.get(i).lastIndexOf("/"),data.get(i).length()).replace("Test", ""));
 			System.out.println(data5.get(i));
-			System.out.println(data5.get(i).length());
+//			System.out.println(data5.get(i).length());
 
-			if(data4.get(i) == data5.get(i)){
-				System.out.println("等しい");
+			if(data4.get(i).equals(data5.get(i))){
+				System.out.println(data3.get(i) + "," + data.get(i));
 			}else{
-			  System.out.println("等しくない");
+				System.out.println("等しくない");
 			}
 //			System.out.println(data3.get(i) + "," + data.get(i));
 
